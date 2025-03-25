@@ -19,10 +19,10 @@ export default function AuthPage() {
   }, [user, setLocation]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gray-50 dark:bg-gray-900">
       {/* Left Column - Authentication Forms */}
-      <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center">
-        <div className="max-w-md mx-auto w-full">
+      <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center items-center">
+        <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
           <div className="mb-8">
             <Logo className="h-12 w-auto mb-4" />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -61,7 +61,7 @@ export default function AuthPage() {
       </div>
 
       {/* Right Column - Hero Section */}
-      <div className="w-full md:w-1/2 bg-primary-600 p-12 hidden md:flex flex-col justify-center relative overflow-hidden">
+      <div className="w-full md:w-1/2 bg-primary-600 p-12 hidden md:flex flex-col justify-center relative overflow-hidden h-full rounded-r-lg ml-4 shadow-lg">
         <div className="absolute top-0 left-0 w-full h-full bg-primary-600 opacity-90"></div>
         <div className="absolute top-20 left-0 w-64 h-64 bg-primary-300 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-primary-800 rounded-full filter blur-3xl"></div>

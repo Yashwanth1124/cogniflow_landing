@@ -158,6 +158,16 @@ export default function Header({
           >
             <MessageCircleIcon className="h-5 w-5" />
           </Button>
+          
+          {/* Contact Support button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="hidden md:flex"
+            onClick={() => window.open('mailto:support@cogniflow.com', '_blank')}
+          >
+            Contact Support
+          </Button>
 
           {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
@@ -284,6 +294,33 @@ export default function Header({
                     <span>Settings</span>
                   </a>
                 </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="cursor-pointer" asChild>
+                <a 
+                  href="mailto:support@cogniflow.com" 
+                  className="flex w-full"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <svg
+                    className="mr-2 h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 12a9 9 0 0 1-9 9c-2.97 0-5.57-1.47-7.15-3.71" />
+                    <path d="M12 3a9 9 0 0 0-9 9v.75" />
+                    <path d="M3 12.75h.75" />
+                    <path d="M12 21v-9" />
+                    <path d="M16.5 7.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                  </svg>
+                  <span>Contact Support</span>
+                </a>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout} className="cursor-pointer">

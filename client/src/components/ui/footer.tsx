@@ -59,6 +59,14 @@ export default function Footer() {
               <li><a href="#" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-400">Documentation</a></li>
               <li><a href="#" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-400">API Status</a></li>
               <li><a href="#" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary-400">Community</a></li>
+              <li>
+                <a 
+                  href="mailto:support@cogniflow.com" 
+                  className="text-primary font-medium hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300"
+                >
+                  Contact Support
+                </a>
+              </li>
             </ul>
           </div>
           
@@ -76,7 +84,7 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 md:mb-0">© 2023 Cogniflow, Inc. All rights reserved.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 md:mb-0">© 2025 Cogniflow, Inc. All rights reserved.</p>
           <div className="flex space-x-4">
             <a href="#" className="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-400 text-sm">Terms</a>
             <a href="#" className="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-400 text-sm">Privacy</a>
