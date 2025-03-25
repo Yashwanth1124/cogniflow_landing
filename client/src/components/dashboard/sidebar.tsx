@@ -13,6 +13,7 @@ import {
   SettingsIcon,
   HelpCircleIcon,
   XIcon,
+  ArrowLeftRightIcon,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
@@ -176,6 +177,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               icon={<ShoppingCartIcon className="h-5 w-5" />}
               title="Procurement"
               isActive={isActive("/dashboard/procurement")}
+            />
+            <SidebarItem
+              href="/transactions"
+              icon={<ArrowLeftRightIcon className="h-5 w-5" />}
+              title="Transactions"
+              isActive={location === "/transactions"}
             />
           </div>
 
