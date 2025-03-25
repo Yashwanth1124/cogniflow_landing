@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
 import { storage } from './storage';
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
 
 // Promisify file system operations
 const writeFile = promisify(fs.writeFile);

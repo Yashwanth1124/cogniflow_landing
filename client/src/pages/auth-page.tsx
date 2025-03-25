@@ -66,7 +66,7 @@ export default function AuthPage() {
         <div className="absolute top-20 left-0 w-64 h-64 bg-primary-300 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-primary-800 rounded-full filter blur-3xl"></div>
         
-        <div className="relative z-10 max-w-lg mx-auto text-white">
+        <div className="relative z-10 max-w-lg mx-auto text-primary">
           <h2 className="text-3xl font-bold mb-6">
             Transform Your Business with AI-Powered ERP
           </h2>
