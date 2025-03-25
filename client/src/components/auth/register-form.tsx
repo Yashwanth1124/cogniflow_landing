@@ -22,7 +22,7 @@ const formSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   email: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  company: z.string().optional(),
+  company: z.string().min(1, "Company name is required"), // Removed .optional()
   termsAccepted: z.boolean().refine(val => val === true, {
     message: "You must accept the terms and conditions",
   }),
@@ -54,7 +54,7 @@ export default function RegisterForm() {
         password: values.password,
         fullName: values.fullName,
         email: values.email,
-        company: values.company || undefined,
+        company: values.company, // No need for || undefined anymore
       },
       {
         onSuccess: () => {
@@ -67,7 +67,7 @@ export default function RegisterForm() {
   const handleGoogleSignup = () => {
     // Mock Google signup since we don't have actual OAuth integration
     setIsGoogleLoading(true);
-    
+
     // Simulate signing up with demo account
     setTimeout(() => {
       registerMutation.mutate(
@@ -76,6 +76,7 @@ export default function RegisterForm() {
           password: "generated_password", // This would be handled by OAuth in a real implementation
           fullName: "Google User",
           email: `user${Math.floor(Math.random() * 10000)}@example.com`,
+          company: "Google" //Adding company for google signup
         },
         {
           onSuccess: () => {
@@ -162,7 +163,7 @@ export default function RegisterForm() {
             name="company"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Company (Optional)</FormLabel>
+                <FormLabel>Company</FormLabel> {/* Removed (Optional) */}
                 <FormControl>
                   <Input
                     placeholder="Enter your company name"

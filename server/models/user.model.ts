@@ -1,4 +1,3 @@
-
 import mongoose, { Schema, Document } from 'mongoose';
 import { User } from '@shared/schema';
 
