@@ -114,14 +114,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       >
         {/* Sidebar header */}
         <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
-          <Link href="/dashboard">
-            <a className="flex items-center">
-              <Logo className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-lg font-semibold text-gray-900 dark:text-white">
-                Cogniflow
-              </span>
-            </a>
-          </Link>
+          <div 
+            className="flex items-center cursor-pointer" 
+            onClick={() => window.location.href = '/dashboard'}
+          >
+            <Logo className="h-8 w-8 text-primary" />
+            <span className="ml-2 text-lg font-semibold text-gray-900 dark:text-white">
+              Cogniflow
+            </span>
+          </div>
           <Button
             variant="ghost"
             size="icon"

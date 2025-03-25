@@ -20,6 +20,7 @@ import {
   LineChartIcon,
   PieChartIcon,
   BarChartIcon,
+  AlertTriangleIcon,
 } from "lucide-react";
 import {
   ResponsiveContainer,
