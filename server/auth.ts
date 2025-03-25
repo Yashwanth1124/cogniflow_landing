@@ -29,13 +29,11 @@ async function hashPassword(password: string) {
 async function comparePasswords(supplied: string, stored: string | undefined) {
   try {
     if (!stored || !supplied) return false;
-    const [hashed, salt] = stored.split(".");
-    if (!hashed || !salt) return false;
+    const [storedHash, salt] = stored.split(".");
+    if (!storedHash || !salt) return false;
     
     const hashedSupplied = (await scryptAsync(supplied, salt, 64)) as Buffer;
-    const hashedStored = Buffer.from(hashed, "hex");
-    
-    return timingSafeEqual(hashedSupplied, hashedStored);
+    return storedHash === hashedSupplied.toString('hex');
   } catch (error) {
     console.error("Password comparison error:", error);
     return false;
