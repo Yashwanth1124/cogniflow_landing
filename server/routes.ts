@@ -9,7 +9,6 @@ import { setupVoiceAPI } from "./api/voice";
 import { setupBlockchainAPI } from "./api/blockchain";
 import { setupIoTAPI } from "./api/iot";
 import { setupOCRAPI } from "./api/ocr";
-import { setupSupportAPI } from "./api/support";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
@@ -29,9 +28,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Set up OCR API
   await setupOCRAPI(app);
-  
-  // Set up Support API
-  setupSupportAPI(app);
 
   // Transactions API
   app.get("/api/transactions", async (req, res) => {

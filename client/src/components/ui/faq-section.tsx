@@ -84,20 +84,9 @@ export default function FaqSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <p className="text-gray-600 dark:text-gray-300 mb-4">Still have questions? Contact our support team for assistance.</p>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Contact Support</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Contact Support</DialogTitle>
-                <DialogDescription>
-                  Fill out the form below and we'll get back to you as soon as possible.
-                </DialogDescription>
-              </DialogHeader>
-              <ContactForm onClose={() => document.querySelector('dialog')?.close()} />
-            </DialogContent>
-          </Dialog>
+          <Button variant="outline">
+            Contact Support
+          </Button>
         </motion.div>
       </div>
     </section>
