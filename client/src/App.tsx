@@ -8,6 +8,7 @@ import AuthPage from "@/pages/auth-page";
 import DashboardPage from "@/pages/dashboard-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "./hooks/use-auth";
+import { OfflineProvider } from "./context/offline-context";
 
 function Router() {
   return (
@@ -24,8 +25,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <Router />
-        <Toaster />
+        <OfflineProvider>
+          <Router />
+          <Toaster />
+        </OfflineProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
