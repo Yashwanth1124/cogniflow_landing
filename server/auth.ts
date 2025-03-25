@@ -60,13 +60,17 @@ export function setupAuth(app: Express) {
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
-        const user = await storage.getUserByUsername(username);
-        if (!user || !(await comparePasswords(password, user.password))) {
+        const user = await UserModel.findOne({ username });
+        if (!user) {
           return done(null, false);
-        } else {
-          return done(null, user);
         }
+        const isValidPassword = await comparePasswords(password, user.password);
+        if (!isValidPassword) {
+          return done(null, false);
+        }
+        return done(null, user);
       } catch (error) {
+        console.error("Login error:", error);
         return done(error);
       }
     }),
@@ -103,25 +107,32 @@ export function setupAuth(app: Express) {
     }
   });
 
-  app.post("/api/login", (req, res, next) => {
-    if (!req.body.username || !req.body.password) {
-      return res.status(400).json({ message: "Username and password are required" });
-    }
-    
-    passport.authenticate("local", (err, user, info) => {
-      if (err) {
-        console.error("Login error:", err);
-        return next(err);
+  app.post("/api/login", async (req, res, next) => {
+    try {
+      if (!req.body.username || !req.body.password) {
+        return res.status(400).json({ message: "Username and password are required" });
       }
+
+      const user = await UserModel.findOne({ username: req.body.username });
       if (!user) {
-        return res.status(401).json({ message: "Invalid username or password" });
+        return res.status(401).json({ message: "User not found" });
       }
-      
+
+      const isValidPassword = await comparePasswords(req.body.password, user.password);
+      if (!isValidPassword) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
       req.login(user, (err) => {
         if (err) return next(err);
-        res.status(200).json(user);
+        const userData = user.toJSON();
+        delete userData.password;
+        res.status(200).json(userData);
       });
-    })(req, res, next);
+    } catch (error) {
+      console.error("Login error:", error);
+      next(error);
+    }
   });
 
   app.post("/api/logout", (req, res, next) => {
