@@ -76,14 +76,17 @@ export function setupAuth(app: Express): void {
     }),
   );
 
-  passport.serializeUser((user, done) => done(null, user._id));
-  passport.deserializeUser(async (id, done) => {
+  passport.serializeUser((user: any, done) => {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(async (id: number, done) => {
     try {
-      const user = await UserModel.findById(id).select('-password');
+      const user = await UserModel.findOne({ id }).select('-password');
       if (!user) {
         return done(new Error('User not found'));
       }
-      done(null, user);
+      done(null, user.toJSON());
     } catch (error) {
       done(error);
     }
