@@ -52,12 +52,12 @@ export default function LandingPage() {
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-6">
-              <Button variant="ghost" onClick={() => setCurrentSection("hero")}>Home</Button>
-              <Button variant="ghost" onClick={() => setCurrentSection("features")}>Features</Button>
-              <Button variant="ghost" onClick={() => setCurrentSection("why")}>Why Cogniflow</Button>
-              <Button variant="ghost" onClick={() => setCurrentSection("demo")}>Demo</Button>
-              <Button variant="ghost" onClick={() => setCurrentSection("testimonials")}>Testimonials</Button>
-              <Button variant="ghost" onClick={() => setCurrentSection("faq")}>FAQ</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}>Home</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}>Features</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('why')?.scrollIntoView({ behavior: 'smooth' })}>Why Cogniflow</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}>Demo</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}>Testimonials</Button>
+              <Button variant="ghost" onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}>FAQ</Button>
             </nav>
             
             {/* CTA Buttons */}
@@ -92,12 +92,12 @@ export default function LandingPage() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-white dark:bg-gray-900 shadow-md">
             <div className="px-4 py-2 space-y-1">
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("hero"); setMobileMenuOpen(false); }}>Home</Button>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("features"); setMobileMenuOpen(false); }}>Features</Button>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("why"); setMobileMenuOpen(false); }}>Why Cogniflow</Button>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("demo"); setMobileMenuOpen(false); }}>Demo</Button>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("testimonials"); setMobileMenuOpen(false); }}>Testimonials</Button>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => { setCurrentSection("faq"); setMobileMenuOpen(false); }}>FAQ</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>Home</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>Features</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('why')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>Why Cogniflow</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>Demo</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>Testimonials</Button>
+              <Button variant="ghost" className="w-full justify-start" onClick={() => { document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }}>FAQ</Button>
               <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
                 <Button variant="ghost" onClick={() => { navigateToAuth("login"); setMobileMenuOpen(false); }}>Log In</Button>
                 <Button onClick={() => { navigateToAuth("register"); setMobileMenuOpen(false); }}>Get Started</Button>
@@ -118,13 +118,25 @@ export default function LandingPage() {
         )}
       </header>
 
-      {/* Page Sections */}
-      {currentSection === "hero" && <HeroSection onGetStarted={() => navigateToAuth("register")} onWatchDemo={() => setCurrentSection("demo")} />}
-      {currentSection === "features" && <FeaturesSection />}
-      {currentSection === "why" && <ComparisonTable onStartTrial={() => navigateToAuth("register")} />}
-      {currentSection === "demo" && <DemoSection onScheduleDemo={() => navigateToAuth("register")} />}
-      {currentSection === "testimonials" && <TestimonialsSection onJoinCustomers={() => navigateToAuth("register")} />}
-      {currentSection === "faq" && <FaqSection />}
+      {/* Page Sections - All sections are visible */}
+      <div id="hero" className="pt-16 min-h-screen">
+        <HeroSection onGetStarted={() => navigateToAuth("register")} onWatchDemo={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })} />
+      </div>
+      <div id="features" className="pt-24 pb-16">
+        <FeaturesSection />
+      </div>
+      <div id="why" className="pt-24 pb-16">
+        <ComparisonTable onStartTrial={() => navigateToAuth("register")} />
+      </div>
+      <div id="demo" className="pt-24 pb-16">
+        <DemoSection onScheduleDemo={() => navigateToAuth("register")} />
+      </div>
+      <div id="testimonials" className="pt-24 pb-16">
+        <TestimonialsSection onJoinCustomers={() => navigateToAuth("register")} />
+      </div>
+      <div id="faq" className="pt-24 pb-16">
+        <FaqSection />
+      </div>
 
       {/* Footer */}
       <Footer />
