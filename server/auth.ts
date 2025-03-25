@@ -6,6 +6,7 @@ import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
+import { UserModel } from "./models/user.model";
 
 declare global {
   namespace Express {
@@ -113,21 +114,20 @@ export function setupAuth(app: Express) {
         return res.status(400).json({ message: "Username and password are required" });
       }
 
-      const user = await UserModel.findOne({ username: req.body.username });
+      const user = await storage.getUserByUsername(req.body.username);
       if (!user) {
-        return res.status(401).json({ message: "User not found" });
+        return res.status(401).json({ message: "Invalid username or password" });
       }
 
       const isValidPassword = await comparePasswords(req.body.password, user.password);
       if (!isValidPassword) {
-        return res.status(401).json({ message: "Invalid password" });
+        return res.status(401).json({ message: "Invalid username or password" });
       }
 
       req.login(user, (err) => {
         if (err) return next(err);
-        const userData = user.toJSON();
-        delete userData.password;
-        res.status(200).json(userData);
+        delete user.password;
+        res.status(200).json(user);
       });
     } catch (error) {
       console.error("Login error:", error);
