@@ -55,14 +55,20 @@ export function setupAuth(app: Express): void {
   passport.use(
     new LocalStrategy(async (username, password, done) => {
       try {
-        const user = await storage.getUserByUsername(username); // Adjust based on your storage logic
-        if (!user) return done(null, false, { message: "User not found" });
+        const user = await UserModel.findOne({ username });
+        if (!user) {
+          return done(null, false, { message: "User not found" });
+        }
 
         const isValidPassword = await comparePasswords(password, user.password);
-        if (!isValidPassword)
+        if (!isValidPassword) {
           return done(null, false, { message: "Invalid password" });
+        }
 
-        return done(null, user);
+        // Return user without password
+        const safeUser = user.toObject();
+        delete safeUser.password;
+        return done(null, safeUser);
       } catch (error) {
         console.error("Login error:", error);
         return done(error);
@@ -70,10 +76,13 @@ export function setupAuth(app: Express): void {
     }),
   );
 
-  passport.serializeUser((user, done) => done(null, (user as SelectUser).id));
-  passport.deserializeUser(async (id: number, done) => {
+  passport.serializeUser((user, done) => done(null, user._id));
+  passport.deserializeUser(async (id, done) => {
     try {
-      const user = await storage.getUser(id); // Replace with your storage logic
+      const user = await UserModel.findById(id).select('-password');
+      if (!user) {
+        return done(new Error('User not found'));
+      }
       done(null, user);
     } catch (error) {
       done(error);
