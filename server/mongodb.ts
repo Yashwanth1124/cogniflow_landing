@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { log } from './vite';
 
 // MongoDB connection string (from environment variable)
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://cogniflow:Cogniflow@123@cluster0.nv6lk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://cogniflow:Cogniflow%40123@cluster0.nv6lk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Connect to MongoDB
 export async function connectToDatabase(): Promise<typeof mongoose> {
