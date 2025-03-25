@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
+import { OfflineStatus } from "@/components/ui/offline-status";
 
 interface HeaderProps {
   user: User | null;
@@ -43,13 +44,13 @@ export default function Header({
   const notificationsRef = useRef<HTMLDivElement>(null);
 
   // Get notifications
-  const { data: notifications = [] } = useQuery({
+  const { data: notifications = [] } = useQuery<any[]>({
     queryKey: ["/api/notifications"],
     enabled: !!user,
   });
 
   // Check if user has unread notifications
-  const unreadCount = notifications.filter((n: any) => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   // Handle scroll effect for header shadow
   useEffect(() => {
@@ -121,6 +122,16 @@ export default function Header({
               className="pl-10 w-full"
             />
           </div>
+          
+          {/* Offline status indicator - desktop */}
+          <div className="ml-4 hidden lg:block">
+            <OfflineStatus />
+          </div>
+        </div>
+        
+        {/* Offline status indicator - mobile */}
+        <div className="lg:hidden flex items-center mr-2">
+          <OfflineStatus className="scale-75 transform origin-right" />
         </div>
 
         {/* Right side - User actions */}

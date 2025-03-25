@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import LandingPage from "@/pages/landing-page";
 import AuthPage from "@/pages/auth-page";
 import DashboardPage from "@/pages/dashboard-page";
+import FinanceTransactionPage from "@/pages/finance-transaction-page";
 import { ProtectedRoute } from "./lib/protected-route";
 import { AuthProvider } from "./hooks/use-auth";
 import { OfflineProvider } from "./context/offline-context";
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/auth" component={AuthPage} />
       <ProtectedRoute path="/dashboard/*" component={DashboardPage} />
+      <ProtectedRoute path="/transactions" component={FinanceTransactionPage} />
       <Route component={NotFound} />
     </Switch>
   );
