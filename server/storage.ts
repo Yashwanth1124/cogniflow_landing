@@ -33,7 +33,7 @@ export interface IStorage {
   markNotificationsAsRead(userId: number, ids: number[]): Promise<void>;
   
   // Session store
-  sessionStore: session.SessionStore;
+  sessionStore: any; // Using any to avoid express-session SessionStore type error
 }
 
 export class MemStorage implements IStorage {
@@ -44,7 +44,7 @@ export class MemStorage implements IStorage {
   private reports: Map<number, Report>;
   private notifications: Map<number, Notification>;
   
-  sessionStore: session.SessionStore;
+  sessionStore: any;
   currentId: {
     users: number;
     transactions: number;
@@ -81,8 +81,8 @@ export class MemStorage implements IStorage {
       password: "$2b$10$jvZjwNxYs5PrBQQN9xj5aO8zLPGjhC4OdaYI3z6wnEkQwydBwVOSq", // "password"
       fullName: "Demo User",
       email: "demo@cogniflow.com",
-      company: "Cogniflow Inc",
-      role: "admin"
+      company: "Cogniflow Inc"
+      // role is added in createUser method
     });
   }
 

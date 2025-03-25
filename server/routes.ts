@@ -5,6 +5,8 @@ import { setupAuth } from "./auth";
 import { WebSocketServer } from "ws";
 import { setupWebSockets } from "./websocket";
 import { setupAI } from "./ai";
+import { setupVoiceAPI } from "./api/voice";
+import { setupBlockchainAPI } from "./api/blockchain";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
@@ -12,6 +14,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Set up AI routes
   setupAI(app);
+  
+  // Set up Voice Command API
+  setupVoiceAPI(app);
+  
+  // Set up Blockchain API
+  setupBlockchainAPI(app);
 
   // Transactions API
   app.get("/api/transactions", async (req, res) => {
