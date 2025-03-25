@@ -36,7 +36,12 @@ app.use((req, res, next) => {
   next();
 });
 
+import { connectToDatabase } from './mongodb';
+
 (async () => {
+  // Connect to MongoDB before setting up routes
+  await connectToDatabase();
+  
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
